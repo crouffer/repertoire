@@ -1,0 +1,15 @@
+language: python
+
+python:
+  - '3.6'
+
+before_install:
+  - pip install pipenv
+  - pip install codecov
+
+install:
+  - pipenv install --dev
+
+script:
+  - pytest
+  - codecov

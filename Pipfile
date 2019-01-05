@@ -1,0 +1,17 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pytest = "*"
+pytest-cov = "*"
+faker = "*"
+
+[packages]
+flask-restplus = "*"
+sqlalchemy = "*"
+pytest-cov = "*"
+
+[requires]
+python_version = "3.6"
