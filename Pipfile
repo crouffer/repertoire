@@ -14,6 +14,7 @@ flask-restplus = "*"
 sqlalchemy = "*"
 pytest-cov = "*"
 flask-cors = "*"
+flask-sqlalchemy = "*"
 
 [requires]
 python_version = "3.6"

@@ -36,8 +36,11 @@ class Application:
         cls.app = Flask(__name__)
         cls._initialize_app()
         cls._initialize_logger()
-        cls._initialize_routes()
         cls.app.logger.info('Application initialized')
+
+        with cls.app.app_context():
+            cls._initialize_database()
+            cls._initialize_routes()
 
     @classmethod
     def _initialize_app(cls, config_file=DEFAULT_CONFIG_FILE_NAME):
@@ -52,17 +55,21 @@ class Application:
     @classmethod
     def _initialize_api_routes(cls):
         from .api.healthcheck import ns as health_check_namespace
+        from .api.performer import ns as performer_namespace
         from .api import api
 
         from flask import Blueprint
         blueprint = Blueprint('api', __name__, url_prefix=cls.app.config['URL_PREFIX'])
         api.init_app(blueprint)
         api.add_namespace(health_check_namespace)
+        api.add_namespace(performer_namespace)
         cls.app.register_blueprint(blueprint)
 
     @classmethod
     def _initialize_database(cls):  # pragma: no cover
         # Initialize the database
+        from .database import initialize_database
+        initialize_database(cls.app, create_db=True, reset_db=False)
 
         # Close sessions when leaving app context
         @cls.app.teardown_appcontext
@@ -122,7 +129,7 @@ class Application:
             return data, http.HTTPStatus.OK
 
         @cls.app.route('/api/config')
-        def get_s3_config():   # pragma: no cover
+        def get_config():   # pragma: no cover
             import json
             data = {
                 'DB_ADDRESS': cls.app.config['DB_ADDRESS']

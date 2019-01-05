@@ -15,6 +15,7 @@ class Constants:
 
     # Namespaces
     NS_HEALTH_CHECK = 'health_check'
+    NS_PERFORMER = 'performer'
 
     # Status codes
     STATUS_OK = 'ok'

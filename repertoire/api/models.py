@@ -10,3 +10,11 @@ HealthCheckStatusModel = api.model('HealthCheckStatusModel', {
     'status': fields.String(),
     'timestamp': fields.DateTime()
 })
+
+
+PersonModel = api.model('PersonModel', {
+    'id': fields.Integer(),
+    'first_name': fields.String(required=True),
+    'last_name': fields.String(required=True),
+    'date_added': fields.DateTime(required=False)
+})

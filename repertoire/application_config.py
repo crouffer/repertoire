@@ -17,19 +17,19 @@ DB_NAME = os.environ.get('DB_NAME')
 DB_USERNAME = os.environ.get('DB_USERNAME')
 DB_PASSWORD = os.environ.get('DB_PASSWORD')
 
-DB_ENGINE = 'mssql'
+DB_ENGINE = 'sqlite'
 if DB_ENGINE == 'mssql':    #pragma: no cover
+    SQLALCHEMY_POOL_SIZE = 5
+    SQLALCHEMY_MAX_OVERFLOW = 40
     SQLALCHEMY_DATABASE_URI = 'mssql+pymssql://{}:{}@{}/{}'.format(DB_USERNAME, DB_PASSWORD, DB_ADDRESS, DB_NAME)
 elif DB_ENGINE == 'mysql':  #pragma: no cover
     SQLALCHEMY_DATABASE_URI = 'mysql+pymssql://{}:{}@{}/{}'.format(DB_USERNAME, DB_PASSWORD, DB_ADDRESS, DB_NAME)
 elif DB_ENGINE == 'sqlite': #pragma: no cover
-    SQLALCHEMY_DATABASE_URI = 'sqlite://{}:{}@{}/{}'.format(DB_USERNAME, DB_PASSWORD, DB_ADDRESS, DB_NAME)
+    PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///%s' % (os.path.join(PROJECT_ROOT, "repertoire.db"))
 else:   #pragma: no cover
     raise RuntimeError("Unsupported DB_ENGINE: {}".format(DB_ENGINE))
 
-
-SQLALCHEMY_POOL_SIZE = 5
-SQLALCHEMY_MAX_OVERFLOW = 40
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 SQLALCHEMY_ECHO = False
 

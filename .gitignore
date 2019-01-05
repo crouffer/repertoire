@@ -3,5 +3,5 @@ venv
 .coverage
 __pycache__
 htmlcov
-
+repertoire/repertoire.db
 
