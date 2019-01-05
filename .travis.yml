@@ -8,7 +8,7 @@ before_install:
   - pip install codecov
 
 install:
-  - pipenv install
+  - pipenv install --dev
 
 script:
   - pytest
