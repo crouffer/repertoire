@@ -7,11 +7,13 @@ verify_ssl = true
 pytest = "*"
 pytest-cov = "*"
 faker = "*"
+requests = "*"
 
 [packages]
 flask-restplus = "*"
 sqlalchemy = "*"
 pytest-cov = "*"
+flask-cors = "*"
 
 [requires]
 python_version = "3.6"
