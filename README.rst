@@ -8,8 +8,8 @@ Credits
 =======
 Created by Chris Rouffer (chris.rouffer@gmail.com)
 
-.. |Build-Status| image:: https://travis-ci.org/crouffer/repertoire.svg?branch=master
-  :target: https://travis-ci.org/crouffer/repertoire
+.. |Build-Status| image:: https://travis-ci.com/crouffer/repertoire.svg?branch=master
+  :target: https://travis-ci.com/crouffer/repertoire
 
 .. |LICENCE| image:: https://github.com/crouffer/repertoire/blob/master/mit_license_badge.svg
   :target: https://github.com/crouffer/repertoire/blob/master/LICENSE
