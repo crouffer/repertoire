@@ -1,5 +1,5 @@
 from flask_restplus import Resource
-from repertoire.api.restplus import api
+from repertoire.api import api
 from repertoire.common.types import Constants
 
 ns = api.namespace(Constants.NS_HEALTH_CHECK, description='Service health check')
