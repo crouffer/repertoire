@@ -14,6 +14,10 @@ flask-restplus = "*"
 sqlalchemy = "*"
 pytest-cov = "*"
 flask-cors = "*"
+python-dotenv = "*"
+requests = "*"
+authlib = "*"
+six = "*"
 
 [requires]
 python_version = "3.6"

@@ -1,3 +1,14 @@
+import os
+
+# OAuth Settings
+AUTH0_CALLBACK_URL = 'http://localhost:8000/callback'
+AUTH0_CLIENT_ID = os.environ.get('AUTH0_CLIENT_ID')
+AUTH0_CLIENT_SECRET = os.environ.get('AUTH0_CLIENT_SECRET')
+AUTH0_API_BASE_URL = os.environ.get('AUTH0_API_BASE_URL')
+AUTH0_ACCESS_TOKEN_URL = os.environ.get('AUTH0_ACCESS_TOKEN_URL')
+AUTH0_AUTHORIZE_URL = os.environ.get('AUTH0_AUTHORIZE_URL')
+AUTH0_AUDIENCE = os.environ.get('AUTH0_API_BASE_URL') + '/userinfo'
+
 # Flask settings
 FLASK_SERVER_ADDRESS = '0.0.0.0'
 FLASK_SERVER_PORT = 5000
@@ -11,7 +22,6 @@ RESTPLUS_MASK_SWAGGER = False
 RESTPLUS_ERROR_404_HELP = True
 
 # SQLAlchemy settings
-import os
 DB_ADDRESS = os.environ.get('DB_ADDRESS')
 DB_NAME = os.environ.get('DB_NAME')
 DB_USERNAME = os.environ.get('DB_USERNAME')
