@@ -35,7 +35,6 @@ class Application:
         from flask import Flask
         cls.app = Flask(__name__)
         cls._initialize_app()
-        cls._initialize_authentication()
         cls._initialize_logger()
         cls._initialize_routes()
         cls.app.logger.info('Application initialized')
@@ -60,24 +59,6 @@ class Application:
         api.init_app(blueprint)
         api.add_namespace(health_check_namespace)
         cls.app.register_blueprint(blueprint)
-
-    @classmethod
-    def _initialize_authentication(cls):
-        from authlib.flask.client import OAuth
-
-        oauth = OAuth(cls.app)
-
-        cls.auth0 = oauth.register(
-            'auth0',
-            client_id=cls.app.config['AUTH0_CLIENT_ID'],
-            client_secret=cls.app.config['AUTH0_CLIENT_SECRET'],
-            api_base_url=cls.app.config['AUTH0_API_BASE_URL'],
-            access_token_url=cls.app.config['AUTH0_ACCESS_TOKEN_URL'],
-            authorize_url=cls.app.config['AUTH0_AUTHORIZE_URL'],
-            client_kwargs={
-                'scope': 'openid profile',
-            },
-        )
 
     @classmethod
     def _initialize_database(cls):  # pragma: no cover
@@ -124,60 +105,6 @@ class Application:
     @classmethod
     def _initialize_static_routes(cls):
         import http
-
-        @cls.app.route('/callback')
-        def callback_handling():
-            # Handles response from token endpoint
-            cls.auth0.authorize_access_token()
-            resp = cls.auth0.get('userinfo')
-            userinfo = resp.json()
-
-            # Store the user information in flask session.
-            from flask import redirect,     session
-            session['jwt_payload'] = userinfo
-            session['profile'] = {
-                'user_id': userinfo['sub'],
-                'name': userinfo['name'],
-                'picture': userinfo['picture']
-            }
-            return redirect('/dashboard')
-
-        @cls.app.route('/login')
-        def login():
-            return cls.auth0.authorize_redirect(redirect_uri=cls.app.config['AUTH0_CALLBACK_URL'],
-                                                audience=cls.app.config['AUTH0_AUDIENCE'])
-
-        def requires_auth(f):
-            from functools import wraps
-
-            @wraps(f)
-            def decorated(*args, **kwargs):
-                from flask import redirect, session
-                if 'profile' not in session:
-                    # Redirect to Login page here
-                    return redirect('/')
-                return f(*args, **kwargs)
-
-                return decorated
-
-        @cls.app.route('/dashboard')
-        @requires_auth
-        def dashboard():
-            from flask import render_template, session
-            import json
-            return render_template('dashboard.html',
-                                   userinfo=session['profile'],
-                                   userinfo_pretty=json.dumps(session['jwt_payload'], indent=4))
-
-        @cls.app.route('/logout')
-        def logout():
-            from flask import redirect, session, url_for
-            from six.moves.urllib.parse import urlencode
-            # Clear session stored data
-            session.clear()
-            # Redirect user to logout endpoint
-            params = {'returnTo': url_for('home', _external=True), 'client_id': cls.app.config['AUTH0_CLIENT_ID']}
-            return redirect(cls.auth0.api_base_url + '/v2/logout?' + urlencode(params))
 
         @cls.app.route('/')
         def route_base_url():   # pragma: no cover

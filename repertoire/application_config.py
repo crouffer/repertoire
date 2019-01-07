@@ -4,10 +4,7 @@ import os
 AUTH0_CALLBACK_URL = 'http://localhost:8000/callback'
 AUTH0_CLIENT_ID = os.environ.get('AUTH0_CLIENT_ID')
 AUTH0_CLIENT_SECRET = os.environ.get('AUTH0_CLIENT_SECRET')
-AUTH0_API_BASE_URL = os.environ.get('AUTH0_API_BASE_URL')
-AUTH0_ACCESS_TOKEN_URL = os.environ.get('AUTH0_ACCESS_TOKEN_URL')
-AUTH0_AUTHORIZE_URL = os.environ.get('AUTH0_AUTHORIZE_URL')
-AUTH0_AUDIENCE = os.environ.get('AUTH0_API_BASE_URL') + '/userinfo'
+AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN')
 
 # Flask settings
 FLASK_SERVER_ADDRESS = '0.0.0.0'
