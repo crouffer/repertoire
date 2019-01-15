@@ -18,6 +18,11 @@ python-dotenv = "*"
 requests = "*"
 authlib = "*"
 six = "*"
+flask-bcrypt = "*"
+flask-migrate = "*"
+pyjwt = "*"
+flask-script = "*"
+flask-testing = "*"
 
 [requires]
 python_version = "3.6"
