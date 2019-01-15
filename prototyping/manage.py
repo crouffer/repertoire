@@ -11,6 +11,7 @@ from app.main import create_app, db
 # Every time a new model is added, run the following two commands:
 # $> python manage.py db migrate --message 'description of migration'
 # $> python manage.py db upgrade
+from app.main.model import blacklist
 from app.main.model import user
 # End Database Models
 
