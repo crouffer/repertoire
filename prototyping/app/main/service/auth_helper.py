@@ -6,10 +6,13 @@ class Auth:
 
     @staticmethod
     def get_logged_in_user(new_request):
+        print("get_logged_in_user")
         # get the auth token
         auth_token = new_request.headers.get('Authorization')
         if auth_token:
+            print("auth_token detected")
             resp = User.decode_auth_token(auth_token)
+            print("resp: {}".format(resp))
             if not isinstance(resp, str):
                 user = User.query.filter_by(id=resp).first()
                 response_object = {
@@ -22,12 +25,15 @@ class Auth:
                     }
                 }
                 return response_object, 200
-            response_object = {
-                'status': 'fail',
-                'message': resp
-            }
-            return response_object, 401
+            else:
+                print("resp is not a string")
+                response_object = {
+                    'status': 'fail',
+                    'message': resp
+                }
+                return response_object, 401
         else:
+            print("no auth_token detected")
             response_object = {
                 'status': 'fail',
                 'message': 'Provide a valid auth token.'
