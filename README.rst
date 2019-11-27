@@ -2,6 +2,11 @@ Repertoire
 ##########
 |Build-Status| |Codecov| |LICENCE|
 
+Update: 2019-11-26
+==================
+I'm not actively working on this . I got side-tracked with some really shiney other projects that I am under NDA not to share.  At some point I may revive this project, but for now it is gathering dust...
+
+
 Contributing
 ============
 
